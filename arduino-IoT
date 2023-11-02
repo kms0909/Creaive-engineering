@@ -1,0 +1,20 @@
+아두이노
+void setup(){
+  Serial.begin(9600);
+  pinMode(13, OUTPUT);
+}
+
+void loop(){
+  if(Serial.available() > 0){
+    char v = Serial.read();
+    
+    if(v == '1'){
+      digitalWrite(13, HIGH);
+    }
+    if(v == '0'){
+      digitalWrite(13, LOW);
+    }
+  }
+}
+
+프로세싱

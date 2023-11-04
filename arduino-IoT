@@ -1,13 +1,25 @@
 아두이노
+double th(int v) {	 // 화씨를 섭씨로 바꾸어줌
+  double t;
+  t = log(((10240000/v) - 10000));
+  t = 1 /(0.001129148 + (0.000234125*t) + (0.0000000876741*t*t*t));
+  t = t - 273.15;
+  return t;
+}
+
 void setup(){
   Serial.begin(9600);
   pinMode(13, OUTPUT);
 }
 
 void loop(){
+  int l = analogRead(A1);
+  int t = analogRead(A0);
+
   if(Serial.available() > 0){
-    char v = Serial.read();
     
+    char v = Serial.read();
+
     if(v == '1'){
       digitalWrite(13, HIGH);
     }
@@ -15,6 +27,10 @@ void loop(){
       digitalWrite(13, LOW);
     }
   }
+  
+  Serial.println(l);
+  Serial.println(th(t));
+  delay(1000);
 }
 
 프로세싱
@@ -29,8 +45,19 @@ void setup(){
   s = new Server(this, 12345);
 }
 
+String msg;
+String a;
 void draw(){
   c = s.available();
+  
+  if(p.available() > 0){
+    msg = p.readStringUntil('\n');
+    if(msg != null){
+      a = msg;
+      print(a);
+    }
+  }
+  
   if(c != null){
     String m = c.readString();
     m = m.substring(m.length() - 1);

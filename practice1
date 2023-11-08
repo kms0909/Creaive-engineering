@@ -6,4 +6,40 @@ if(m.indexOf('0') == 0) {  //m값의 0번째가 0이면,
   digitalWrite(13, HIGH);  //13번 핀을 켜라.
 } 
 '0111' = 켜짐 / '1011', '1101', '1110' = 무반응
+
+프로세싱에서 숫자를 입력받아 1이면 led가 켜지고 0이면 led가 꺼지는 프로그램
+아두이노
+void setup() {
+  Serial.begin(9600);
+  pinMode(13, OUTPUT);
+}
+
+void loop(){
+  if(Serial.available() > 0){
+    String m = Serial.readString();
+    //Serial.print(m);
+
+    if(m.indexOf('0') == 0) 
+      digitalWrite(13, LOW);
+    if(m.indexOf('1') == 0) 
+      digitalWrite(13, HIGH);
+  }
+}
+
+프로세싱
+import processing.serial.*;
+Serial p;
+
+void setup(){
+  p = new Serial(this, "COM4", 9600);
+}
+
+void draw(){}
+
+void keyPressed(){
+  background(0);
+  textSize(64);
+  text(key, 10, 64);
+  p.write(key);
+}
 =================================================================================================================================================

@@ -1,6 +1,6 @@
-if(m.indexOf('a') == b) //b 번째의 m값이 a면 다음을 실행하라.
+if(m.indexOf('a') == b) //m값의 b번째가 a면 다음을 실행하라.
 ex)
-if(m.indexOf('0') == 0) {
-  digitalWrite(13, HIGH);
-}
+if(m.indexOf('0') == 0) {  //m값의 0번째가 0이면, 
+  digitalWrite(13, HIGH);  //13번 핀을 켜라.
+} 
 '0111' = 켜짐 / '1011', '1101', '1110' = 무반응

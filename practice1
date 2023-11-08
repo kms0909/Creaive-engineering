@@ -33,13 +33,30 @@ void loop(){
 
 프로세싱
 import processing.serial.*;
+import processing.net.*;
 Serial p;
+Server s;
+Client c;
 
 void setup(){
   p = new Serial(this, "COM4", 9600);
+  s = new Server(this, 12345);
 }
 
-void draw(){}
+void draw(){
+  c = s.available();
+  if(c!=null){
+    String m = c.readString();
+    print(m);
+    if(m.indexOf('0') == '0') 
+      p.write('0');
+    if(m.indexOf('1') == '0')
+      p.write('1');
+    if(m.indexOf('2') == '0')
+      p.write('2');
+    c.stop();
+  }
+}
 
 void keyPressed(){
   background(0);

@@ -1,0 +1,30 @@
+import processing.serial.*;
+import processing.net.*;
+Serial p;
+Server s;
+Client c;
+
+String m = "";
+String m1 = "";
+
+void setup(){
+  p = new Serial(this, "COM4", 9600);
+  s = new Server(this, 12345);
+}
+
+void draw(){
+  c = s.available();
+  
+  if(p.available() > 0){
+    m = p.readStringUntil('\n');
+    if(m != null){
+      //print(m);
+    }
+  }
+  
+  if(c != null){
+    m1 = c.readString();
+    print(m1);
+    c.stop();
+  }
+}
